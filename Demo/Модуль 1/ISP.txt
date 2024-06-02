@@ -8,41 +8,8 @@
 1) Назначение имени: hostnamectl set-hostnamectl ISP && newgrp
    Назначение IP-адреса: nano /etc/network/interfaces, далее заполнение файла по шаблону:
 
-#IPv4 to CLI
-auto интерфейс_в_сторону_CLI
-iface интерфейс_в_сторону_CLI inet static
-address 172.16.0.1
-netmask 255.255.255.252
-
-#IPv6 to CLI
-auto интерфейс_в_сторону_CLI
-iface интерфейс_в_сторону_CLI inet6 static
-address 2001::3:1
-netmask 120
-
-#IPv4 to HQ-R
-auto интерфейс_в_сторону_HQ-R
-iface интерфейс_в_сторону_HQ-R inet static
-address 10.0.10.1
-netmask 255.255.255.252
-
-#IPv6 to HQ-R
-auto интерфейс_в_сторону_HQ-R
-iface интерфейс_в_сторону_HQ-R inet6 static
-address 2001::10:1
-netmask 126
-
-#IPv4 to BR-R
-auto интерфейс_в_сторону_BR-R
-iface интерфейс_в_сторону_BR-R inet static
-address 10.0.20.1
-netmask 255.255.255.252
-
-#IPv6 to BR-R
-auto интерфейс_в_сторону_BR-R
-iface интерфейс_в_сторону_BR-R inet6 static
-address 2001::20:1
-netmask 126
+ Настройка ip-конфигурации проходит через команду nmtui
+   Полная натсройка в методичке на сайте Петруши 
 
 Перезапуск службы интернета - systemctl restart networking
 
