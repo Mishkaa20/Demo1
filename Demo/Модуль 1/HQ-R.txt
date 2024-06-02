@@ -27,7 +27,7 @@
 
    !!!ПЕРЕЗАПУСК FRR!!! - systemctl restart frr && systemctl enable frr
 
-   Настройка ospf и ospf6 BR-R, HQ-R, ISP 
+   Настройка ospf и ospf6 HQ-R
    Полная натсройка ospf и ospf6 в методичке на сайте Петруши 
 
    !!!ПЕРЕЗАПУСК FRR!!! - systemctl restart frr
