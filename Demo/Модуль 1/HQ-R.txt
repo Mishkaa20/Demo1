@@ -8,31 +8,8 @@
 1) Назначение имени: hostnamectl set-hostnamectl HQ-R && newgrp
    Назначение IP-адреса: nano /etc/network/interfaces, далее заполнение файла по шаблону:
 
-#IPv4 to ISP
-auto интерфейс_в_сторону_isp
-iface интерфейс_в_сторону_isp inet static
-address 10.0.10.2
-netmask 255.255.255.252
-gateway 10.0.10.1
-
-#IPv6 to ISP
-auto интерфейс_в_сторону_isp
-iface интерфейс_в_сторону_isp inet6 static
-address 2001::10:2
-netmask 126
-gateway 2001::10:1
-
-#IPv4 to HQ-SRV
-auto интерфейс_в_сторону_HQ-SRV
-iface интерфейс_в_сторону_HQ-SRV inet static
-address 192.168.10.1
-netmask 255.255.255.192
-
-#IPv6 to HQ-SRV
-auto интерфейс_в_сторону_HQ-SRV
-iface интерфейс_в_сторону_HQ-SRV inet6 static
-address 2001::1:1
-netmask 122
+   Настройка ip-конфигурации проходит через команду nmtui
+   Полная натсройка в методичке на сайте Петруши
 
 Перезапуск службы интернета - systemctl restart networking
 
@@ -49,20 +26,21 @@ netmask 122
    ospf6d=no на ospf6d=yes
 
    !!!ПЕРЕЗАПУСК FRR!!! - systemctl restart frr && systemctl enable frr
-   
-   Настройка OSPF: vtysh, conf t, router ospf, ospf router-id 1.1.1.1, network 192.168.10.0/26 area 1, network 10.0.10.0/30 area 0, do wr, ex, ex, ex
-   Настройка OSPF6: vtysh, conf t, router ospf6, ospf6 router-id 0.0.0.1, area 0.0.0.0 range 2001::1:0/122, area 0.0.0.0 range 2001::10:0/126, do wr, ex, ex, ex
+
+   Настройка ospf и ospf6 BR-R, HQ-R, ISP 
+   Полная натсройка ospf и ospf6 в методичке на сайте Петруши 
 
    !!!ПЕРЕЗАПУСК FRR!!! - systemctl restart frr
 
 3) Настройка DHCP (автоматической выдачи IP-адресов): apt install isc-dhcp-server radvd, nano /etc/default/isc-dhcp-server, после чего изменяем параметры: 
 INTERFACESv4="" на INTERFACESv4"имя_интерфейса_в_сторону_HQ-SRV" 
-(к примеру INTERFACESv4"ens36")
+(к примеру INTERFACESv4"ens224")
 После чего CTRL + O, CTRL + X, rm /etc/dhcp/dhcpd.conf, nano /etc/dhcp/dhcpd.conf, прописать следующее:
 
-subnet 192.168.10.0 netmask 255.255.255.192 {
-range 192.168.10.2 192.168.10.63;
-option routers 192.168.10.1;
+!!!Конечный пул адресов расчитывается по маске а ipv6 расчитывают по ipv6 калькулятору в методички!!!
+subnet 192.168.1.0 netmask 255.255.255.XXX {
+range 192.168.1.X 192.168.1.XX;
+option routers 192.168.1.1;
 }
 
 host HQ-SRV {
