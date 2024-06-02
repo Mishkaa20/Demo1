@@ -27,8 +27,8 @@
 
    !!!ПЕРЕЗАПУСК FRR!!! - systemctl restart frr && systemctl enable frr
    
-   Настройка OSPF: vtysh, conf t, router ospf, ospf router-id 3.3.3.3, network 192.168.20.0/28 area 3, network 10.0.20.0/30 area 0, do wr, ex, ex, ex
-   Настройка OSPF6: vtysh, conf t, router ospf6, ospf6 router-id 0.0.0.3, area 0.0.0.0 range 2001::2:0/124, area 0.0.0.0 range 2001::20:0/126, do wr, ex, ex, ex
+   Настройка ospf и ospf6 BR-R
+   Полная натсройка ospf и ospf6 в методичке на сайте Петруши 
 
    !!!ПЕРЕЗАПУСК FRR!!! - systemctl restart frr
 
